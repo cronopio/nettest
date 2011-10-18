@@ -1,0 +1,28 @@
+{
+  "author": "Daniel Aristizabal Romero <aristizabal.daniel@gmail.com>",
+  "name": "nettest",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/cronopio/nettest.git"
+  },
+  "contributors": [
+    {
+      "name": "Ricardo Lanziano",
+      "email": "ricardo.lanziano@gmail.com"
+    },
+    {
+      "name": "Fabian Hernandez",
+      "email": "fhernandezn@gmail.com"
+    }
+  ],
+  "main": "server.js",
+  "engines": {
+    "node": "~v0.4.12"
+  },
+  "dependencies": {
+    "hook.io": "0.7.7",
+    "mongoose": "2.3.4"
+  },
+  "devDependencies": {}
+}
