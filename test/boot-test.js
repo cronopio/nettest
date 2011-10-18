@@ -6,7 +6,8 @@
 
 var vows = require('vows'),
     assert = require('assert'),
-    Hook = require('hook.io').Hook;
+    Hook = require('hook.io').Hook,
+    Plugins = require('../lib/plugins');
     
 vows.describe('Inicializando Applicacion').addBatch({
   'Hook Base': {
@@ -19,8 +20,8 @@ vows.describe('Inicializando Applicacion').addBatch({
       assert.equal(this.event, 'hook::ready');
     },
     'cargo la libreria de los plugins': {
-      topic: require('../lib/plugins'),
-      'revisamos que plugins existen': function(lib) {
+      topic: new Plugins(),
+      'revisamos que plugins existen': function(plugins) {
         
       }
     }
