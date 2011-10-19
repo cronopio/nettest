@@ -18,15 +18,15 @@ for (var l in libs) {
 
 App.on('hook::ready', function() {
   App.spawn(libHooks);
-  App.emit('init');
-});
-
-App.on('database::conectado', function() {
   App.emit('boot');
 });
 
-App.on('plugins::children::ready', function() {
-  App.emit('init');
+App.on('database::conectado', function() {
+  App.emit('plugins_boot');
+});
+
+App.on('plugins::ready', function() {
+  App.emit('ready');
 });
 
 App.start();
