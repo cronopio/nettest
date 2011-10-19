@@ -11,3 +11,12 @@ Para correr las pruebas es necesario tener instalado el vows.
 Despues de instalar el vows puede correr las pruebas
 
 ``` vows test/* --spec ```
+
+## Run
+Para correr la aplicacion solo se debe tener instalado `node` y `npm`.
+
+Instalar las dependencias
+```npm install```
+
+Ejecutar
+```node server.js```
