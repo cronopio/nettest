@@ -30,3 +30,5 @@ App.on('plugins::ready', function() {
 });
 
 App.start();
+
+module.exports = App;
