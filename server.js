@@ -9,7 +9,7 @@ var App = new Hook({
   debug: true
 });
 
-var libs = ['database'],
+var libs = ['database', 'plugins'],
     libHooks = [];
 
 for (var l in libs) {
@@ -18,10 +18,15 @@ for (var l in libs) {
 
 App.on('hook::ready', function() {
   App.spawn(libHooks);
+  App.emit('init');
 });
 
 App.on('database::conectado', function() {
-  App.emit('system::boot');
+  App.emit('boot');
+});
+
+App.on('plugins::children::ready', function() {
+  App.emit('init');
 });
 
 App.start();
