@@ -54,5 +54,11 @@ vows.describe('Inicializando la Aplicacion').addBatch({
     'Cargo el plugin test2': function() {
       assert.isObject(Server.children.plugins._hook.children.test2);
     }
+  },
+  'Termina de arrancar el framework base': {
+    topic: function() {
+      Server.on('ready', this.callback);
+    },
+    'Completo': function() {}
   }
 }).export(module);
