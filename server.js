@@ -10,13 +10,18 @@ var App = new Hook({
 });
 
 var libs = ['database'],
-    code = {};
-
+    libHooks = [];
 
 for (var l in libs) {
-  code[libs[l]] = require('./lib/' + libs[l]);
-  // Cargo cada libreria
-  code[libs[l]](App);
+  libHooks.push({src:'./lib/' + libs[l], name:libs[l]});
 }
+
+App.on('hook::ready', function() {
+  App.spawn(libHooks);
+});
+
+App.on('database::conectado', function() {
+  App.emit('system::boot');
+});
 
 App.start();

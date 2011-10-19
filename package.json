@@ -21,7 +21,7 @@
     "node": "~v0.4.12"
   },
   "dependencies": {
-    "hook.io": "0.7.7",
+    "hook.io": "git://github.com/hookio/hook.io.git",
     "mongoose": "2.3.4"
   },
   "devDependencies": {}
