@@ -41,12 +41,11 @@ vows.describe('Probando la Entidad').addBatch({
   },
   'Extendiendo una entidad usuario': {
     topic: function() {
-      mongoose.modelSchemas.Entidad.add({completo: {type: String, get: function(v) {
-        console.log('Contexto', this);
-        console.log('Llegada', v);
+      Entidad.add({completo: {type: String, get: function() {
         return this.nombre + ' ' + this.apellido;
       }}});
-      var usuario = new mongoose.models.Entidad({subtipo:'user'});
+      mongoose.model('EntidadExt', Entidad);
+      var usuario = new mongoose.models.EntidadExt({subtipo:'user'});
       usuario.nombre = 'Pedro'
       usuario.apellido = 'Perez'
       return usuario;
