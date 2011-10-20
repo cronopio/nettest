@@ -5,9 +5,9 @@
  */
 
 var vows = require('vows'),
-assert = require('assert'),
-mongoose = require('mongoose'),
-Entidad = require('../lib/entidad');
+    assert = require('assert'),
+    mongoose = require('mongoose'),
+    Entidad = require('../lib/entidad');
 
 mongoose.connect("mongodb://localhost/nettest-test");
 
