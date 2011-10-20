@@ -47,7 +47,7 @@ vows.describe('Probando la Entidad').addBatch({
         return this.nombre + ' ' + this.apellido;
       }}});
       mongoose.model('EntidadExt', Entidad);
-      var usuario = new mongoose.models.EntidadExt({subtipo:'user'});
+      var usuario = new mongoose.models.EntidadExt({tipo:'user'});
       usuario.nombre = 'Pedro'
       usuario.apellido = 'Perez'
       return usuario;
