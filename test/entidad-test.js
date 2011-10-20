@@ -9,6 +9,8 @@ assert = require('assert'),
 mongoose = require('mongoose'),
 Entidad = require('../lib/entidad');
 
+mongoose.connect("mongodb://localhost/nettest-test");
+
 vows.describe('Probando la Entidad').addBatch({
   'Instancio la entidad': {
     topic: new mongoose.models.Entidad,
@@ -59,5 +61,36 @@ vows.describe('Probando la Entidad').addBatch({
     'Debe mostrar el nombre copleto': function(e) {
       assert.equal(e.completo, 'Pedro Perez');
     }
-  }
+  },
+  'Instancio la Entidad para probar la guardada': {
+    topic: function() {
+      var guardar = new mongoose.models.Entidad;
+      guardar.last_action = "creada";
+      guardar.save(this.callback);
+    },
+    'Que sea un objeto': function(e, doc) {
+      assert.equal(doc.tipo, 'object')
+    },
+    'Que tenga fecha de creacion': function(e, doc) {
+      assert.instanceOf(doc.time_created, Date);
+    },
+    'Que tenga como last_action creada': function(e, doc) {
+      assert.equal(doc.last_action, 'creada');
+    }
+  },
+  'Inicio una busqueda en la BD': {
+      topic: function() {
+        var creada = mongoose.models.Entidad;
+        creada.find({last_action:"creada"}, this.callback);
+      },
+      'Recibo un Array de mongoose': function(e, docs) {
+        assert.isArray(docs);
+      },
+      'Recibo minimo un resultado': function(e, docs) {
+        assert.strictEqual(docs.length > 0, true)
+      },
+      'El primer resultado debe ser crada': function(e, docs) {
+        assert.equal(docs[0].last_action, 'creada');
+      }
+    }
 }).export(module);
