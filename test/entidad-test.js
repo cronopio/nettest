@@ -79,18 +79,18 @@ vows.describe('Probando la Entidad').addBatch({
     }
   },
   'Inicio una busqueda en la BD': {
-      topic: function() {
-        var creada = mongoose.models.Entidad;
-        creada.find({last_action:"creada"}, this.callback);
-      },
-      'Recibo un Array de mongoose': function(e, docs) {
-        assert.isArray(docs);
-      },
-      'Recibo minimo un resultado': function(e, docs) {
-        assert.strictEqual(docs.length > 0, true)
-      },
-      'El primer resultado debe ser crada': function(e, docs) {
-        assert.equal(docs[0].last_action, 'creada');
-      }
+    topic: function() {
+      var creada = mongoose.models.Entidad;
+      creada.find({last_action:"creada"}, this.callback);
+    },
+    'Recibo un Array de mongoose': function(e, docs) {
+      assert.isArray(docs);
+    },
+    'Recibo minimo un resultado': function(e, docs) {
+      assert.strictEqual(docs.length > 0, true)
+    },
+    'El primer resultado debe ser crada': function(e, docs) {
+      assert.equal(docs[0].last_action, 'creada');
     }
+  }
 }).export(module);
