@@ -29,5 +29,36 @@ vows.describe('Probando la Entidad').addBatch({
       var diff = entity.time_updated.valueOf() - entity.time_created.valueOf();
       assert.strictEqual(diff < 60, true);
     }
+  },
+  'Creando un subtipo de la Entidad': {
+    topic: new mongoose.models.Entidad({subtipo:'user'}),
+    'probamos que sea una entidad objeto': function(e) {
+      assert.equal(e.tipo, 'object');
+    },
+    'probamos que sea de subtipo user': function(e) {
+      assert.equal(e.subtipo, 'user');
+    }
+  },
+  'Extendiendo una entidad usuario': {
+    topic: function() {
+      mongoose.modelSchemas.Entidad.add({completo: {type: String, get: function(v) {
+        console.log('Contexto', this);
+        console.log('Llegada', v);
+        return this.nombre + ' ' + this.apellido;
+      }}});
+      var usuario = new mongoose.models.Entidad({subtipo:'user'});
+      usuario.nombre = 'Pedro'
+      usuario.apellido = 'Perez'
+      return usuario;
+    },
+    'Debe llamarse pedro': function(e) {
+      assert.equal(e.nombre, 'Pedro')
+    },
+    'Debe tener Perez como apellido': function(e) {
+      assert.equal(e.apellido, 'Perez')
+    },
+    'Debe mostrar el nombre copleto': function(e) {
+      assert.equal(e.completo, 'Pedro Perez');
+    }
   }
 }).export(module);
