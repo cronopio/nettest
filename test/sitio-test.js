@@ -29,12 +29,15 @@ vows.describe('Probando el Sitio').addBatch({
         e.save(this.callback);
       },
       'Debe Tener el nombre TestSite': function(err, doc) {
+        assert.isNull(err);
         assert.equal(doc.name, 'TestSite');
       },
       'Debe tener la descripcion correcta': function(err, doc) {
+        assert.isNull(err);
         assert.equal(doc.description, 'Esta es la descripcion');
       },
       'Debe tener URL': function(err, doc) {
+        assert.isNull(err);
         assert.equal(doc.url, 'http://elmismo.com');
       }
     }
@@ -45,6 +48,7 @@ vows.describe('Probando el Sitio').addBatch({
       sitio.find({name:'TestSite'}, this.callback);
     },
     'Debe regresar un array con minimo un elemento': function(err, docs) {
+      assert.isNull(err);
       assert.isArray(docs);
       assert.isTrue(docs.length > 0);
     },
@@ -76,6 +80,7 @@ vows.describe('Probando el Sitio').addBatch({
         modelo.find({name:'OtroTestSite'}, this.callback);
       },
       'Debe regresar un array minimo de un elemento': function(err, docs) {
+        assert.isNull(err);
         assert.isArray(docs);
         assert.isTrue(docs.length > 0);
       },

@@ -22,6 +22,7 @@ vows.describe('Probando las relaciones').addBatch({
       mySite.save(this.callback);
     },
     'Creado con el nombre correcto': function(err, doc) {
+      assert.isNull(err);
       assert.equal(doc.name, 'Tener un Miembro')
     }
   },
@@ -32,6 +33,7 @@ vows.describe('Probando las relaciones').addBatch({
       myEnt.save(this.callback);
     },
     'Crada correctamente': function(err, doc) {
+      assert.isNull(err);
       assert.equal(doc.last_action, 'Creada');
     }
   }
@@ -61,6 +63,7 @@ vows.describe('Probando las relaciones').addBatch({
       rel.save(this.callback);
     },
     'Guardado correcto': function(err, doc) {
+      assert.isNull(err);
       assert.equal(doc.relation, 'member_of');
     }
   }
