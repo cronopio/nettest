@@ -41,12 +41,15 @@ vows.describe('Probando la Entidad').addBatch({
       assert.equal(e.subtipo, 'user');
     }
   },
-  'Extendiendo una entidad usuario': {
+  'Extendiendo una entidad diferente': {
     topic: function() {
-      Entidad.add({completo: {type: String, get: function() {
-        return this.nombre + ' ' + this.apellido;
-      }}});
-      mongoose.model('EntidadExt', Entidad);
+      Entidad.completo = {
+        type: String,
+        get: function() {
+          return this.nombre + ' ' + this.apellido;
+        }
+      };
+      mongoose.model('EntidadExt', new mongoose.Schema(Entidad));
       var usuario = new mongoose.models.EntidadExt({tipo:'user'});
       usuario.nombre = 'Pedro'
       usuario.apellido = 'Perez'
@@ -69,12 +72,15 @@ vows.describe('Probando la Entidad').addBatch({
       guardar.save(this.callback);
     },
     'Que sea un objeto': function(e, doc) {
+      assert.isNull(e);
       assert.equal(doc.tipo, 'object')
     },
     'Que tenga fecha de creacion': function(e, doc) {
+      assert.isNull(e);
       assert.instanceOf(doc.time_created, Date);
     },
     'Que tenga como last_action creada': function(e, doc) {
+      assert.isNull(e);
       assert.equal(doc.last_action, 'creada');
     }
   },
@@ -84,12 +90,15 @@ vows.describe('Probando la Entidad').addBatch({
       creada.find({last_action:"creada"}, this.callback);
     },
     'Recibo un Array de mongoose': function(e, docs) {
+      assert.isNull(e);
       assert.isArray(docs);
     },
     'Recibo minimo un resultado': function(e, docs) {
+      assert.isNull(e);
       assert.strictEqual(docs.length > 0, true)
     },
     'El primer resultado debe ser crada': function(e, docs) {
+      assert.isNull(e);
       assert.equal(docs[0].last_action, 'creada');
     }
   }
