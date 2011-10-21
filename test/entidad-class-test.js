@@ -13,7 +13,9 @@ mongoose.connect("mongodb://localhost/nettest-test");
 
 vows.describe('Probando la Entidad').addBatch({
   'Tratamos de cargar el codigo': {
-    topic: Entidad,
+    topic: function() {
+      return Entidad;
+    },
     'Debe tener un constructor': function(E) {
       assert.isFunction(E);
     },
@@ -25,6 +27,13 @@ vows.describe('Probando la Entidad').addBatch({
 }).addBatch({
   'Instancio la Entidad': {
     topic: new Entidad(),
+    'Debe tener tipo object': function(e) {
+      assert.equal(e.tipo, 'object');
+    },
+    'Las fechas deben ser numeros': function(e) {
+      assert.isNumber(e.time_created);
+      assert.isNumber(e.time_updated);
+    },
     'Debe tener una funcion set': function(e) {
       assert.isFunction(e.set);
     },
@@ -35,6 +44,18 @@ vows.describe('Probando la Entidad').addBatch({
       var self = e;
       assert.doesNotThrow(function(){
         self.set({subtipo:'alguno'});
+      }, Error);
+    },
+    'la funcion no puede recibir un string': function(e) {
+      var self = e;
+      assert.throws(function() {
+        self.set('testing');
+      }, Error);
+    },
+    'la funcion set no puede recibir una funcion': function(e) {
+      var self = e;
+      assert.throws(function() {
+        self.set(function(){});
       }, Error);
     }
   }
