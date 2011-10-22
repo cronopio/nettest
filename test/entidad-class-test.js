@@ -59,4 +59,29 @@ vows.describe('Probando la Entidad').addBatch({
       }, Error);
     }
   }
+}).addBatch({
+  'Comprabamos Set() a fondo': {
+    topic: new Entidad(),
+    'Set debe ser una funcion': function(e) {
+      assert.isFunction(e.set);
+    },
+    'Recibe un atributo permitido': function(e) {
+      assert.isObject(e.set({subtipo:'otrotipo'}));
+    },
+    'Niega un atributo no permitido': function(e) {
+      assert.isFalse(e.set({noesunatributo:'otrotipo'}))
+    },
+    'Uso varios atributos': function(e) {
+      var res = e.set({subtipo:'nuevotipo', tipo:'test'})
+      assert.isObject(res);
+      assert.equal(res.subtipo, 'nuevotipo');
+      assert.equal(res.tipo, 'test');
+    },
+    'Uso varios atributos invalidos': function(e) {
+      assert.isFalse(e.set({nopermitdo:'nuevotipo', nodefinido:'test'}));
+    },
+    'Uso mezcla de atributos': function(e) {
+      assert.isFalse(e.set({subtipo:'nuevotipo', nodefinido:'test'}))
+    }
+  }
 }).export(module);
