@@ -35,9 +35,30 @@ function Entidad(inicializadores) {
 };
 
 Entidad.prototype.set = function(vals) {
+  var self = this,
+      err = 0;
   if (typeof vals !== 'object') {
     throw new Error('Debe ser un objeto');
   }
+  for (var v in vals) {
+    if (typeof _attrs[v] !== undefined) {
+      self[v] = vals[v];
+    } else {
+      err++;
+    }
+  }
+  if (err > 0) {
+    return false;
+  } else {
+    return self;
+  }
+};
+
+Entidad.prototype.get = function(name) {
+  if (typeof _attrs[name] !== undefined) {
+    return this[name]
+  }
+  return false;
 };
 
 module.exports = Entidad; 
