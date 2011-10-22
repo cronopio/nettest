@@ -51,9 +51,12 @@ Entidad.prototype.set = function(vals) {
 };
 
 Entidad.prototype.get = function(name) {
+  if (typeof name !== 'string') return false;
+  
   if (typeof _attrs[name] !== 'undefined') {
     return this[name]
   }
+  
   return false;
 };
 

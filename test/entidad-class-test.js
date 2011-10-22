@@ -60,7 +60,7 @@ vows.describe('Probando la Entidad').addBatch({
     }
   }
 }).addBatch({
-  'Comprabamos Set() a fondo': {
+  'Comprobamos Set() a fondo': {
     topic: new Entidad(),
     'Set debe ser una funcion': function(e) {
       assert.isFunction(e.set);
@@ -82,6 +82,36 @@ vows.describe('Probando la Entidad').addBatch({
     },
     'Uso mezcla de atributos': function(e) {
       assert.isFalse(e.set({subtipo:'nuevotipo', nodefinido:'test'}))
+    }
+  }
+}).addBatch({
+  'Comprobamos Get() a fondo': {
+    topic: new Entidad(),
+    'Get debe ser una funcion': function(e) {
+      assert.isFunction(e.get);
+    },
+    'Get debe recibir un string': function(e) {
+      assert.notEqual(e.get('tipo'), false);
+    },
+    'No debe recibir un array': function(e) {
+      assert.isFalse(e.get(['tipo', 'subtipo']));
+    },
+    'No debe recibir un objeto': function(e) {
+      assert.isFalse(e.get({tipo:true, subtipo:false}));
+    }
+  }
+}).addBatch({
+  'Instancio una entidad': {
+    topic: new Entidad(),
+    'para verificar set con el subtipo':{
+      topic: function(e) {
+        assert.isObject(e.set({subtipo:'deprueba'}));
+        return e;
+      },
+      'Usamos get para verificar el subtipo': function(E, e) {
+        assert.isNull(E);
+        assert.equal(e.get('subtipo'), 'deprueba');
+      }
     }
   }
 }).export(module);
